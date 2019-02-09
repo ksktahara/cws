@@ -1,7 +1,10 @@
 *~
 *.swp
 
+# ROS things
 src/CMakeLists.txt
+.catkin_workspace
+.catkin_tools
 build
 devel
-.catkin_workspace
+logs
