@@ -1,5 +1,6 @@
 <launch>
   <node name="joy" pkg="joy" type="joy_node" />
   <node name="br" pkg="imu" type="test_br.py" />
+  <!-- <node name="lis" pkg="imu" type="test_lis_node" /> -->
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find imu)/extra/test.rviz" />
 </launch>
