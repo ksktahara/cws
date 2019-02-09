@@ -47,22 +47,25 @@ int main(int argc, char** argv){
 
         tf::Quaternion rot = tr.getRotation();
 
+        imu::Pitch msg;
+        msg.header.stamp = ros::Time::now();
+
         double roll, pitch, yaw;
         tf::Matrix3x3(rot).getRPY(roll, pitch, yaw);
         ROS_INFO("YPR: %+3.1f %+3.1f %+3.1f",
                 180.0 / M_PI * roll, 180.0 / M_PI * pitch, 180.0 / M_PI * yaw);
+        msg.pitch_YPR = pitch;
 
         getPRY(rot, roll, pitch, yaw);
         ROS_DEBUG("PRY: %+3.1f %+3.1f %+3.1f",
                 180.0 / M_PI * roll, 180.0 / M_PI * pitch, 180.0 / M_PI * yaw);
+        msg.pitch_PRY = pitch;
 
         getRYP(rot, roll, pitch, yaw);
         ROS_INFO("RYP: %+3.1f %+3.1f %+3.1f",
                 180.0 / M_PI * roll, 180.0 / M_PI * pitch, 180.0 / M_PI * yaw);
+        msg.pitch_RYP = pitch;
 
-        imu::Pitch msg;
-        msg.header.stamp = ros::Time::now();
-        msg.pitch = pitch;
         pitch_pub.publish(msg);
 
         rate.sleep();
