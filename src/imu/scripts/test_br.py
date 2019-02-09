@@ -57,7 +57,7 @@ class Broadcaster(object):
         #  rot = tf.transformations.quaternion_from_euler(
         #          self.rot[0], self.rot[1], self.rot[2], 'rxyz')
         rot = tf.transformations.quaternion_from_euler(
-                self.rot[1], self.rot[0], self.rot[2], 'ryxz')
+                self.rot[2], self.rot[1], self.rot[0], 'rzyx')
 
         self.br.sendTransform(self.trans, rot,
                 rospy.Time.now(), "imu", "map")
