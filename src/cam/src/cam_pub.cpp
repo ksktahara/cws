@@ -10,7 +10,7 @@ int main(int argc, char** argv)
     ros::NodeHandle nh;
 
     image_transport::ImageTransport it(nh);
-    image_transport::Publisher image_pub = it.advertise("image", 10);
+    image_transport::Publisher image_pub = it.advertise("image", 1);
 
     cv::Mat image;
     cv::VideoCapture camera(0);
@@ -30,9 +30,7 @@ int main(int argc, char** argv)
         if(!image.empty()){
             sensor_msgs::ImagePtr msg = cv_bridge::CvImage(std_msgs::Header(),
                     "bgr8", image).toImageMsg();
-            ROS_WARN("pub");
             image_pub.publish(msg);
-            // ROS_WARN("wait");
             // cv::waitKey(0);
         }
 
