@@ -23,18 +23,20 @@ int main(int argc, char** argv)
     camera.set(cv::CAP_PROP_FRAME_WIDTH, 640);
     camera.set(cv::CAP_PROP_FRAME_HEIGHT, 360);
 
-    ros::Rate rate(20);
+    ros::Rate rate(2);
     while(ros::ok()) {
         camera >> image;
 
         if(!image.empty()){
             sensor_msgs::ImagePtr msg = cv_bridge::CvImage(std_msgs::Header(),
                     "bgr8", image).toImageMsg();
+            ROS_WARN("pub");
             image_pub.publish(msg);
-            cv::waitKey(0);
+            // ROS_WARN("wait");
+            // cv::waitKey(0);
         }
 
-        ros::spinOnce();
+        // ros::spinOnce();
         rate.sleep();
     }
 
